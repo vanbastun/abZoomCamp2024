@@ -5,11 +5,13 @@ from time import time
 import pandas as pd
 from sqlalchemy import create_engine
 
-engine = create_engine('postgresql://root:root@localhost:5431/ny_taxi')
+engine = create_engine('postgresql://root:root@pgdatabase/ny_taxi')
 
 engine.connect()
 
-df_iter = pd.read_csv('/workspaces/abZoomCamp2024/yellow_tripdata_2021-01.csv.gz',
+source_path = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz'
+                      
+df_iter = pd.read_csv(source_path,
                       compression='gzip', iterator=True, chunksize=100000)
 
 df = next(df_iter)
