@@ -4,6 +4,6 @@ RUN apt-get install wget
 RUN pip install pyarrow pandas sqlalchemy psycopg2
 
 WORKDIR /app
-COPY ingest_data.py ingest_data.py 
+COPY green_taxi_data.py green_taxi_data.py 
 
-ENTRYPOINT [ "python", "ingest_data.py" ]
+ENTRYPOINT [ "python", "green_taxi_data.py" ]
