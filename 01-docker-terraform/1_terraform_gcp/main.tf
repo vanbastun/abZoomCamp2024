@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "5.13.0"
     }
   }
@@ -9,14 +9,14 @@ terraform {
 
 provider "google" {
   credentials = "./keys/creds.json"
-  project = "vocal-tempo-411407"
-  region  = "europe-central2"
-  zone    = "europe-central2-a"
+  project     = var.project
+  region      = var.region
+  zone        = var.zone
 }
 
 resource "google_storage_bucket" "terra-bucket" {
-  name          = "vocal-tempo-411407-terra-bucket"
-  location      = "EU"
+  name          = var.gcs_bucket_name
+  location      = var.location
   force_destroy = true
 
   lifecycle_rule {
@@ -36,4 +36,9 @@ resource "google_storage_bucket" "terra-bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_bigquery_dataset" "nytaxi-dataset" {
+  dataset_id = var.google_bigquery_dataset_name
+  location = var.location
 }
