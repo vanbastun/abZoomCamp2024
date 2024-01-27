@@ -18,14 +18,10 @@ resource "google_storage_bucket" "terra-bucket" {
   name          = var.gcs_bucket_name
   location      = var.location
   force_destroy = true
+  uniform_bucket_level_access = true
 
-  lifecycle_rule {
-    condition {
-      age = 3
-    }
-    action {
-      type = "Delete"
-    }
+  versioning {
+    enabled     = true
   }
 
   lifecycle_rule {
@@ -38,7 +34,8 @@ resource "google_storage_bucket" "terra-bucket" {
   }
 }
 
-resource "google_bigquery_dataset" "nytaxi-dataset" {
+
+resource "google_bigquery_dataset" "nytaxi_dataset" {
   dataset_id = var.google_bigquery_dataset_name
   location = var.location
 }

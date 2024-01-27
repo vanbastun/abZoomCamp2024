@@ -20,7 +20,7 @@ variable "zone" {
 
 variable "google_bigquery_dataset_name" {
   description = "My dataset name"
-  default = "nytaxi-dataset"
+  default = "nytaxi_dataset"
 }
 
 variable "gcs_bucket_name" {

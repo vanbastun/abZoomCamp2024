@@ -12,6 +12,8 @@ ipython_config.py
 
 */.csv.gz
 
+google-cloud-cli-461.0.0-linux-x86_64.tar.gz
+
 01-docker-terraform/1_terraform_gcp/google-cloud-cli-461.0.0-linux-x86_64.tar.gz
 
 /01-docker-terraform/1_terraform_gcp/keys/creds.json
