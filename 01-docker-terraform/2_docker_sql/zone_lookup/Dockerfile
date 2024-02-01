@@ -4,6 +4,6 @@ RUN apt-get install wget
 RUN pip install pyarrow pandas sqlalchemy psycopg2
 
 WORKDIR /app
-COPY ingest_data.py ingest_data.py 
+COPY zone_lookup.py zone_lookup.py 
 
-ENTRYPOINT [ "python", "ingest_data.py" ]
+ENTRYPOINT [ "python", "zone_lookup.py" ]
