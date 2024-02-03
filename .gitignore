@@ -227,3 +227,11 @@ scratch*
 magic-zoomcamp
 *.json
 
+#another creds
+/workspaces/abZoomCamp2024/google-cloud-cli-461.0.0-linux-x86_64.tar.gz
+/workspaces/abZoomCamp2024/vocal-tempo-411407-9534d130f0ed.json
+/workspaces/abZoomCamp2024/02-workflow-orchestration/mage-zoomcamp/magic-zoomcamp/vocal-tempo-411407-9534d130f0ed.json
+
+
+# pgdata
+/workspaces/abZoomCamp2024/01-docker-terraform/2_docker_sql/ny_taxi_postgres_data
