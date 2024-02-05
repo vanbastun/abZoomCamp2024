@@ -25,7 +25,7 @@ variable "google_bigquery_dataset_name" {
 
 variable "gcs_bucket_name" {
   description = "Bucket storage name"
-  default = "vocal-tempo-411407-terra-bucket"
+  default = "ab-zoomcamp2024-green-taxi-bucket"
 }
 
 variable "gcs_storage_class" {
