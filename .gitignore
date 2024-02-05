@@ -222,10 +222,11 @@ node_modules
 
 # Scratch files
 scratch*
-/mage_data*
+# /mage_data*
 *secrets*.json
-magic-zoomcamp
+# magic-zoomcamp
 *.json
+*keys*.json
 
 #another creds
 /workspaces/abZoomCamp2024/google-cloud-cli-461.0.0-linux-x86_64.tar.gz
