@@ -37,7 +37,7 @@ default:
   DUCKDB_DATABASE: database
   DUCKDB_SCHEMA: main
   # Google
-  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/workspaces/abZoomCamp2024/02-mage/magic-zoomcamp/keys/gcp-keys.json"
+  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/workspaces/abZoomCamp2024/02-mage/personal-gcp.json/gcp-keys.json"
   GOOGLE_LOCATION: EU # Optional
   # MongoDB
   # Specify either the connection string or the (host, password, user, port) to connect to MongoDB.

@@ -8,7 +8,7 @@ if 'data_exporter' not in globals():
     from mage_ai.data_preparation.decorators import data_exporter
 
 # set variables
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/workspaces/abZoomCamp2024/02-mage/magic-zoomcamp/keys/gcp-keys.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/workspaces/abZoomCamp2024/02-mage/personal-gcp.json/gcp-keys.json'
 project_id = 'vocal-tempo-411407'
 bucket_name = 'ab-zoomcamp2024-green-taxi-bucket'
 object_key = 'green_taxi_data.parquet'
