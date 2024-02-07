@@ -9,7 +9,7 @@ def transform(data, *args, **kwargs):
     """
     Transform data according requirements.
 
-    1. Remove rows where the passenger count is equal to 0 or the trip distance is equal to zero.
+    1. Remove rows where the passenger count is equal to 0 and the trip distance is equal to zero.
     2. Create a new column lpep_pickup_date by converting lpep_pickup_datetime to a date.
     3. Rename columns in Camel Case to Snake Case.
     """
@@ -18,7 +18,7 @@ def transform(data, *args, **kwargs):
 
     print(list(data.columns))
     #  transformation 1
-    cleaned_data = data[ (data['passenger_count'] > 0) | (data['trip_distance'] > 0) ]
+    cleaned_data = data[ (data['passenger_count'] > 0) & (data['trip_distance'] > 0) ]
 
     #  transformation 2
     cleaned_data['lpep_pickup_date'] = cleaned_data['lpep_pickup_datetime'].dt.date
