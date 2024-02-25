@@ -1,4 +1,6 @@
 import os
+import pyarrow as pa
+import pyarrow.parquet as pq
 import requests
 from bs4 import BeautifulSoup
 from airflow import DAG
@@ -34,6 +36,46 @@ def download_files():
             with open(file_path, "wb") as file:
                 file.write(response.content)
             print(f"{file_name} downloaded successfully.")
+            
+
+def update_schema():
+    """Update the schema and set proper datatypes for each Parquet file."""
+
+    folder_path = "/home/ubuser/airflow/tmp"  # Folder containing the Parquet files
+
+    # Get the list of Parquet files in the folder
+    file_list = [file for file in os.listdir(folder_path) if file.startswith("fhv")]
+
+    # Iterate over the Parquet files
+    for file_name in file_list:
+        file_path = os.path.join(folder_path, file_name)
+
+        # Create a PyArrow dataset from the Parquet file
+        dataset = pq.ParquetDataset(file_path)
+
+        # Read the Parquet file into a PyArrow table
+        table = dataset.read()
+
+        # Define the target schema with proper datatypes and matching field names
+        target_schema = pa.schema([
+            ('dispatching_base_num', pa.string()),
+            ('pickup_datetime', pa.timestamp('s')),
+            ('dropOff_datetime', pa.timestamp('s')),
+            ('PUlocationID', pa.int64()),
+            ('DOlocationID', pa.int64()),
+            ('SR_Flag', pa.int64()),
+            ('Affiliated_base_number', pa.string())
+        ])
+
+        # Apply schema modifications
+        table = table.cast(target_schema)
+
+        # Write the updated table back to the Parquet file, overwriting the old file
+        pq.write_table(table, file_path)
+
+        print(f"{file_name} updated successfully.")
+
+    print("Schema update complete.")
 
 
 def upload_files():
@@ -66,6 +108,11 @@ with DAG('fhv_data_from_api_to_gcs_dag', default_args=default_args, schedule_int
         task_id='download_files',
         python_callable=download_files
     )
+    
+    schema_task = PythonOperator(
+        task_id='update_schema',
+        python_callable=update_schema
+    )
 
     upload_task = PythonOperator(
         task_id='upload_files',
@@ -77,4 +124,4 @@ with DAG('fhv_data_from_api_to_gcs_dag', default_args=default_args, schedule_int
         python_callable=cleanup_temp_folder
     )
 
-    download_task >> upload_task >> cleanup_task
+    download_task >> schema_task >> upload_task >> cleanup_task
